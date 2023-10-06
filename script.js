@@ -27,11 +27,21 @@ function court (you, judges, quartet) {
 
 }
 
-console.debug(court("Jules", 3, "Adam Betty Frank Mike")) // 60
-console.debug(court("Jules", 2, "Adam Betty Frank Mike")) // 60
-console.debug(court("Jules", 1, "Adam Betty Frank Mike")) // 120
-console.debug(court("Zane", 1, "Mark Hank Ana Vivian")) // 150
-console.debug(court("Zane", 4, "Mark Hank Ana Vivian")) // 60
-console.debug(court("Paul", 4, "Alpha Bravo Foxtrot Whiskey")) // 30
-console.debug(court("Alpha", 2, "Bravo Charlie Delta Echo")) // 30
-console.debug(court("Charlie", 1, "Alpha Bravo Delta Echo")) // 90
+function perf (you, judges, quartet) {
+  const now = performance.now()
+  const time = court(you, judges, quartet)
+  console.debug(`${time} which took ${performance.now() - now}ms to compute`)
+}
+
+const now = performance.now()
+perf("Test", 2, "Uno Dos Tres Quatro") // 60
+perf("Jules", 3, "Adam Betty Frank Mike") // 60
+perf("Jules", 2, "Adam Betty Frank Mike") // 60
+perf("Jules", 1, "Adam Betty Frank Mike") // 120
+perf("Zane", 1, "Mark Hank Ana Vivian") // 150
+perf("Zane", 4, "Mark Hank Ana Vivian") // 60
+perf("Zane", 5, "Mark Hank Ana Vivian") // 30
+perf("Paul", 4, "Alpha Bravo Foxtrot Whiskey") // 30
+perf("Alpha", 2, "Bravo Charlie Delta Echo") // 30
+perf("Charlie", 1, "Alpha Bravo Delta Echo") // 90
+console.debug(`After 10 executions the average (mean) time was ${(performance.now() - now) / 10}ms`)
