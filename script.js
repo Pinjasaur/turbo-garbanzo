@@ -19,7 +19,7 @@ function court (you, judges, quartet) {
 
   // Compute the quotient and remainder of what your turn is versus how many judges there are
   // There are slight optimizations for computing these: https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr
-  return Math.floor(turn / judges) * HEARING_LENGTH + (turn % judges * HEARING_LENGTH)
+  return (Math.floor(turn / judges) * HEARING_LENGTH) + ((turn % judges) * HEARING_LENGTH)
 
 }
 
