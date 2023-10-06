@@ -1,23 +1,25 @@
 function court (you, judges, quartet) {
 
+  // from the spec
   const HEARING_LENGTH = 30
 
   // I believe this is as efficient as possible for sorting strings
   // https://stackoverflow.com/questions/52030110/sorting-strings-in-descending-order-in-javascript-most-efficiently
-  const alphabetical = [you, ...quartet.split(" ")].sort()
-  const turn = alphabetical.findIndex(name => name === you)
-  console.log(alphabetical, turn)
+  const order = [you, ...quartet.split(" ")].sort()
+  const turn = order.findIndex(name => name === you) + 1
+  console.debug(`you=${you} judges=${judges} quartet="${quartet}" order="${order.join(" ")}" turn=${turn}`)
 
-  // Basic base cases
+  // Base case: only 1 judge
   if (judges === 1)
-    return (turn + 1) * HEARING_LENGTH
+    return turn * HEARING_LENGTH
 
-  if (judges >= 5)
+  // Base cases: more judges than humans or your turn will be in the first "rotation"
+  if (judges >= 5 || turn <= judges)
     return HEARING_LENGTH
 
   // Compute the quotient and remainder of what your turn is versus how many judges there are
   // There are slight optimizations for computing these: https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr
-  return Math.floor((turn + 1) / judges) * HEARING_LENGTH + ((turn + 1) % judges * HEARING_LENGTH)
+  return Math.floor(turn / judges) * HEARING_LENGTH + (turn % judges * HEARING_LENGTH)
 
 }
 
