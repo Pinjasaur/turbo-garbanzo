@@ -12,6 +12,7 @@ body {
   border: 1px solid #ccc;
   border-radius: .5rem;
   margin: 1rem;
+  width: 80vw;
   max-width: 32rem;
 }
 
